@@ -462,22 +462,15 @@ The goal of this exercise is to determine the gradient of
 \item Calculate the gradient of $\lambda_n$ with respect to $\W$, i.e. $\nabla \lambda_n(\W)$.
 
   \begin{solution}
-    With \exref{ex:grad-matrix}, we have
+    For the proof, we need to use that the $n$'th eigenvectors of $\W + \epsilon \H$ is $\u_n + \epsilon \Delta \u_n + \mathcal{O}(\epsilon^2)$. We get that
+    \begin{align}
+	|| \u_n ||_2^2 = 1 = || \u_n + \epsilon \Delta \u_n + \mathcal{O}(\epsilon^2) ||_2^2 = || \u_n ||_2^2 + 2\epsilon \u_n^\top \Delta \u_n + \mathcal{O}(\epsilon^2) = 1 +  2\epsilon \u_n^\top \Delta \u_n + \mathcal{O}(\epsilon^2)
+    \end{align}
+    So, we get that $\u_n^\top \Delta \u_n = \mathcal{O}(\epsilon)$. Similar for $\v_n$.
+    With \exref{ex:grad-matrix}, we then have that
     \begin{align}
 	\lambda_n(\W + \epsilon \H) - \lambda_n(\W) &= (\v_n + \epsilon \Delta \v_n)^\top (\W + \epsilon \H) (\u_n + \epsilon \Delta \u_n) - \v_n^\top \W \u_n \\
-      = \epsilon \left( \v_n^\top \H \u_n + \Delta \v_n^\top \W \u_n + v_n^\top \W \Delta \u_n \right) + \mathcal{O}(\epsilon^2) = \epsilon \tr \left( \H \u_n \v_n^\top \right) + \epsilon \lambda_n \left( \Delta \v_n^\top \v_n + \u_n^\top \Delta \u_n \right) + \mathcal{O}(\epsilon^2).
-    \end{align}
-    We can use that
-    \begin{align}
-	1 = || \u_n ||_2^2 = || \u_n + \epsilon \Delta \u_n ||_2^2 = 1 + \epsilon \u_n^\top \Delta \u_n + \mathcal{O}(\epsilon^2)
-    \end{align}
-    to find that
-    \begin{align}
-    \epsilon \u_n^\top \Delta \u_n = \mathcal{O}(\epsilon^2)
-    \end{align}
-    and similar for $\v_n$. Thus we get that
-    \begin{align}
-	\lambda_n(\W + \epsilon \H) - \lambda_n(\W) &= \tr \left( \epsilon \H \v_n \u_n^\top\right) + \mathcal{O}(\epsilon^2)
+      = \epsilon \left( \v_n^\top \H \u_n + \Delta \v_n^\top \W \u_n + v_n^\top \W \Delta \u_n \right) + \mathcal{O}(\epsilon^2) = \epsilon \tr \left( \H \u_n \v_n^\top \right) + \mathcal{O}(\epsilon^2) = \epsilon \tr \left(\v_n \u_n^\top \H^\top) + \mathcal{O}(\epsilon^2).
     \end{align}
     and the gradient is thus $\nabla \lambda_n(\W) = \v_n \u_n^\top$.
   \end{solution}
